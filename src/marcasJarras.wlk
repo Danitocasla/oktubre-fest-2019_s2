@@ -9,7 +9,7 @@ class Corona inherits Cerveza{
 }
 
 object reglamentaria{
-	var property graduacion
+	var property graduacion = 0
 }
 
 class Guiness inherits Cerveza{
@@ -26,7 +26,7 @@ class Jarra{
 	var property capacidad // capacidad en litros
 	var property marca
 	var property contiene  // cerveza que contiene
-	method alcoholPorLitro(){
-		return contiene.graduacion()/100*self.capacidad()
+	method alcoholPorJarra(){
+		return contiene.graduacion()/100 * self.capacidad()
 	}
 }

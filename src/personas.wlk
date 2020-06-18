@@ -8,11 +8,29 @@ class Persona {
 	var property nacionalidad
 	var property marcasQueGusstan = #{}
 	method agregarMarca(marca){
-	//	marcasQueGusstan.add(marca)
+		if(nacionalidad.leGusta()) {marcasQueGusstan.add(marca)}
+	}
+	method totalAlcoholIngerido(){
+		return jarrasCompradas.sum({
+			jarra=>jarra.alcoholPorJarra()
+		})
 	}
 	method estaEbria(){
-		return jarrasCompradas.sum({
-			jarra=>jarra.alcoholPorLitro()
-		})*self.peso() > self.nivelAguante()
+		return self.totalAlcoholIngerido()*self.peso() > self.nivelAguante()
+	}
+}
+object belga{
+	method leGusta(marca){
+		return marca.lupulo() > 4
+	}
+}
+object checo{
+	method leGusta(marca){
+		return marca.graduacion() > 8
+	}
+}
+object aleman{
+	method leGusta(marca){
+		return true
 	}
 }
