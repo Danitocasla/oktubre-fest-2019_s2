@@ -1,16 +1,48 @@
 import marcasJarras.*
+import personas.*
+import nacionalidades.*
+import error.*
 
 class CarpaCervecera {
 	var property limitePersonas
 	var property marcaCerveza
 	var property tieneBanda
-	var property jarrasVendidas = [] //ver si se usa diccionario
+	var property jarrasVendidas = [] //ver si se usa
 	var property personasIngresadas = []
 	
-	method quiereEntrar(persona){}
-	method dejaEntrar(persona){}
-	method entre(){} // ver si va el método en la persona // ver tema error
-	method servirJarra(persona){} // generar error si no está persona en la carpa
-	method ebriosEmpedernidos(){}
-	method esPatriota(persona){}
+	method quiereEntrar(persona){
+		return persona.leGusta(self.marcaCerveza())
+			and persona.escuchaMusica() 
+				and self.tieneBanda()
+	}
+	method dejaEntrar(persona){
+		return not persona.estaEbria() and personasIngresadas.size()+1 > limitePersonas
+	}
+	method puedeEntrar(persona){
+		return self.quiereEntrar(persona) and self.dejaEntrar(persona)
+	}
+	method entre(persona){
+		if (self.quiereEntrar(persona) and self.puedeEntrar(persona)){
+			personasIngresadas.add(persona)
+		}
+		else if(self.quiereEntrar(persona) and not self.puedeEntrar(persona)){
+			throw new UserExeption(message = "NO_CUMPLE_CONDICIONES_DE_INGRESO")
+		}
+	}
+	method validar(persona){
+		return personasIngresadas.any({per=>per == persona})
+	}
+	method servirJarra(persona, capacidad){
+		const jarra = new Jarra(capacidad= capacidad, marca = self.marcaCerveza())
+		if(self.validar(persona)){
+			persona.agregar(jarra)
+			jarrasVendidas.add(jarra)
+		}
+		else{
+			throw new UserExeption(message = "NO_SE_ENCUENTRA_PERSONA_EN_CARPA")
+		}
+	}
+	method ebriosEmpedernidos(){
+		return personasIngresadas.all({pers=>pers.ebrioEmpedernido()})
+	}
 }

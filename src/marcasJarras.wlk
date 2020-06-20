@@ -1,32 +1,29 @@
+import nacionalidades.*
 
 class Cerveza{
 	var property lupulo   // gramos por litro
-	var property pais     // origen de fabricacion
+	var property pais     // de origen
 }
 
-class Corona inherits Cerveza{
-	var property graduacion  // porcentaje de alcohol en volumen
+class Rubia inherits Cerveza{
+	var property graduacion = 0 // porcentaje de alcohol en volumen expresado en numero. Ejemplo 10% == 10
 }
 
-object reglamentaria{
-	var property graduacion = 0
+object graduacion{
+	var property reglamentaria = 0
 }
 
-class Guiness inherits Cerveza{
-	method graduacion(){
-		return reglamentaria.graduacion() + self.lupulo()*2
-	}
+class Negra inherits Cerveza{
+	method graduacion(){ return (graduacion.reglamentaria().min(self.lupulo()*2)) }
 }
-class Hofbrau inherits Guiness{
-	override method graduacion(){
-		return super()*1.25
-	}
+
+class Roja inherits Negra{
+	override method graduacion() = return super()*1.25
 }
+
 class Jarra{
 	var property capacidad // capacidad en litros
-	var property marca
-	var property contiene  // cerveza que contiene
-	method alcoholPorJarra(){
-		return contiene.graduacion()/100 * self.capacidad()
-	}
+	var property marca     //de cerveza
+	
+	method alcoholPorJarra() = return self.marca().graduacion()/100 * self.capacidad()
 }

@@ -1,0 +1,3 @@
+class UserExeption inherits Exception {
+	
+}
