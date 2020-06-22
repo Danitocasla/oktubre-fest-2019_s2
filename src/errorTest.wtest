@@ -8,23 +8,13 @@ describe "test primera parte"{
 	
 	const corona = new Rubia(lupulo=6,pais=alemania)
 	const guiness = new Negra(lupulo=3,pais=checoslovaquia)
-	const guinessBelga = new Negra(lupulo=5,pais=belgica)
 	const hofbrau = new Roja(lupulo=10,pais=belgica)
 	const aleman1 = new Aleman(peso=85,nivelAguante=10,escuchaMusica=true)
-	const aleman2 = new Aleman(peso=95,nivelAguante=15,escuchaMusica=false)
-	const checo1= new Checo(peso=70,nivelAguante=7,escuchaMusica=true)
-	const checo2= new Checo(peso=75,nivelAguante=10,escuchaMusica=false)
-	const belga1 = new Belga(peso=75,nivelAguante=10,escuchaMusica=false)
-	const belga2 = new Belga(peso=75,nivelAguante=18,escuchaMusica=true)
-	const jarraDeCorona = new Jarra(capacidad=1,marca=corona)
-	const jarraDeGuiness = new Jarra(capacidad=1,marca=guiness)
-	const jarraDeHofbrau = new Jarra(capacidad=1,marca=hofbrau)
 	const carpaCorona = new CarpaCervecera(limitePersonas=3,marcaCerveza=corona,tieneBanda=true) 
 	const carpaGuiness = new CarpaCervecera(limitePersonas=2,marcaCerveza=guiness,tieneBanda=true)
-	const carpaHofbrau = new CarpaCervecera(limitePersonas=5,marcaCerveza=hofbrau,tieneBanda=false)
-	const carpaGuinessBelga = new CarpaCervecera(limitePersonas=5,marcaCerveza=guinessBelga,tieneBanda=false)
 	
-test "test" {
+	
+test "test de errores" {
 	corona.graduacion(9)
 	graduacion.reglamentaria(10)
 	
