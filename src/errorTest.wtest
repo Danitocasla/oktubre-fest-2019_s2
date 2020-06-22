@@ -8,7 +8,6 @@ describe "test primera parte"{
 	
 	const corona = new Rubia(lupulo=6,pais=alemania)
 	const guiness = new Negra(lupulo=3,pais=checoslovaquia)
-	const hofbrau = new Roja(lupulo=10,pais=belgica)
 	const aleman1 = new Aleman(peso=85,nivelAguante=10,escuchaMusica=true)
 	const carpaCorona = new CarpaCervecera(limitePersonas=3,marcaCerveza=corona,tieneBanda=true) 
 	const carpaGuiness = new CarpaCervecera(limitePersonas=2,marcaCerveza=guiness,tieneBanda=true)
