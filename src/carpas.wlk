@@ -16,7 +16,7 @@ class CarpaCervecera {
 				and self.tieneBanda()
 	}
 	method dejaEntrar(persona){
-		return not persona.estaEbria() and personasIngresadas.size()+1 > limitePersonas
+		return not persona.estaEbria() and personasIngresadas.size()+1 < limitePersonas
 	}
 	method puedeEntrar(persona){
 		return self.quiereEntrar(persona) and self.dejaEntrar(persona)
@@ -35,7 +35,8 @@ class CarpaCervecera {
 	method servirJarra(persona, capacidad){
 		const jarra = new Jarra(capacidad= capacidad, marca = self.marcaCerveza())
 		if(self.validar(persona)){
-			persona.agregar(jarra)
+			persona.jarraComprada(jarra)
+			persona.agregarMarca(jarra.marca())
 			jarrasVendidas.add(jarra)
 		}
 		else{
