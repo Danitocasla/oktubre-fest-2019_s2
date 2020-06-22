@@ -1,0 +1,70 @@
+import marcasJarras.*
+import personas.*
+import nacionalidades.*
+import carpas.*
+import error.*
+
+describe "test primera parte"{
+	
+	const corona = new Rubia(lupulo=6,pais=alemania)
+	const guiness = new Negra(lupulo=3,pais=checoslovaquia)
+	const guinessBelga = new Negra(lupulo=5,pais=belgica)
+	const hofbrau = new Roja(lupulo=10,pais=belgica)
+	const aleman1 = new Aleman(peso=85,nivelAguante=10,escuchaMusica=true)
+	const aleman2 = new Aleman(peso=95,nivelAguante=15,escuchaMusica=false)
+	const checo1= new Checo(peso=70,nivelAguante=7,escuchaMusica=true)
+	const checo2= new Checo(peso=75,nivelAguante=10,escuchaMusica=false)
+	const belga1 = new Belga(peso=75,nivelAguante=10,escuchaMusica=false)
+	const belga2 = new Belga(peso=75,nivelAguante=18,escuchaMusica=true)
+	const jarraDeCorona = new Jarra(capacidad=1,marca=corona)
+	const jarraDeGuiness = new Jarra(capacidad=1,marca=guiness)
+	const jarraDeHofbrau = new Jarra(capacidad=1,marca=hofbrau)
+	const carpaCorona = new CarpaCervecera(limitePersonas=3,marcaCerveza=corona,tieneBanda=true) 
+	const carpaGuiness = new CarpaCervecera(limitePersonas=2,marcaCerveza=guiness,tieneBanda=true)
+	const carpaHofbrau = new CarpaCervecera(limitePersonas=5,marcaCerveza=hofbrau,tieneBanda=false)
+	const carpaGuinessBelga = new CarpaCervecera(limitePersonas=5,marcaCerveza=guinessBelga,tieneBanda=false)
+	
+test "test" {
+	corona.graduacion(9)
+	graduacion.reglamentaria(10)
+	// entrar personas a las carpas
+	carpaCorona.entre(aleman1)
+	carpaCorona.servirJarra(aleman1,1)
+	carpaGuiness.entre(aleman1)
+	carpaGuiness.servirJarra(aleman1,1)
+	carpaGuiness.servirJarra(aleman1,1)
+	assert.that(carpaGuiness.ebriosEmpedernidos())
+	
+	assert.that(carpaCorona.quiereEntrar(checo1))
+	assert.that(carpaCorona.puedeEntrar(checo1))
+	carpaCorona.entre(checo1)
+	assert.equals(2, carpaCorona.personasIngresadas().size())
+	carpaCorona.servirJarra(checo1,1.2)
+
+	assert.notThat(carpaCorona.puedeEntrar(belga1))
+	assert.that(carpaCorona.puedeEntrar(belga2))
+	carpaCorona.entre(belga2)
+	assert.that(carpaGuiness.ebriosEmpedernidos())
+	
+	
+	
+	carpaHofbrau.entre(checo2)
+	carpaHofbrau.servirJarra(checo2,0.5)
+	assert.notThat(carpaHofbrau.ebriosEmpedernidos())
+	assert.that(carpaHofbrau.puedeEntrar(aleman2))
+	
+	carpaGuinessBelga.entre(aleman2)
+	carpaGuinessBelga.servirJarra(aleman2,0.75)
+	carpaGuinessBelga.entre(belga1)
+	carpaGuinessBelga.servirJarra(belga1,1.75)
+	assert.notThat(carpaGuinessBelga.ebriosEmpedernidos())
+	
+	assert.throwsExceptionWithMessage( "NO_CUMPLE_CONDICIONES_DE_INGRESO" , {
+		=> throw new UserExeption(message = "NO_CUMPLE_CONDICIONES_DE_INGRESO")
+	})
+	assert.throwsExceptionWithMessage( "NO_SE_ENCUENTRA_PERSONA_EN_CARPA" , {
+		=> throw new UserExeption(message = "NO_SE_ENCUENTRA_PERSONA_EN_CARPA")
+	})
+}
+
+}

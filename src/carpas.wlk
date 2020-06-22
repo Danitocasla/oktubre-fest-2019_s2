@@ -10,24 +10,31 @@ class CarpaCervecera {
 	var property jarrasVendidas = [] //ver si se usa
 	var property personasIngresadas = []
 	
+	method condicionMusical(persona){
+		return (persona.escuchaMusica() and self.tieneBanda())
+			or (not persona.escuchaMusica() and not self.tieneBanda())
+	}
 	method quiereEntrar(persona){
 		return persona.leGusta(self.marcaCerveza())
-			and persona.escuchaMusica() 
-				and self.tieneBanda()
+			and self.condicionMusical(persona)
 	}
 	method dejaEntrar(persona){
-		return not persona.estaEbria() and personasIngresadas.size()+1 < limitePersonas
+		return not persona.estaEbria() and personasIngresadas.size()+1 <= limitePersonas
 	}
 	method puedeEntrar(persona){
 		return self.quiereEntrar(persona) and self.dejaEntrar(persona)
 	}
 	method entre(persona){
-		if (self.quiereEntrar(persona) and self.puedeEntrar(persona)){
+		if (self.quiereEntrar(persona) and self.puedeEntrar(persona))
+		{
 			personasIngresadas.add(persona)
+			persona.agregarMarca(self.marcaCerveza())
 		}
-		else if(self.quiereEntrar(persona) and not self.puedeEntrar(persona)){
+		else if(self.quiereEntrar(persona) and not self.puedeEntrar(persona))
+		{
 			throw new UserExeption(message = "NO_CUMPLE_CONDICIONES_DE_INGRESO")
 		}
+		else {throw new UserExeption(message = "NO_QUIERE_Y_NO_CUMPLE_CONDICIONES_DE_INGRESO")}
 	}
 	method validar(persona){
 		return personasIngresadas.any({per=>per == persona})
