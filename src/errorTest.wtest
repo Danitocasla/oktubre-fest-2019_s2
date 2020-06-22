@@ -4,7 +4,7 @@ import nacionalidades.*
 import carpas.*
 import error.*
 
-describe "test segunda parte"{
+describe "test primera parte"{
 	
 	const corona = new Rubia(lupulo=6,pais=alemania)
 	const guiness = new Negra(lupulo=3,pais=checoslovaquia)
@@ -27,37 +27,12 @@ describe "test segunda parte"{
 test "test" {
 	corona.graduacion(9)
 	graduacion.reglamentaria(10)
-	// entrar personas a las carpas
+	
+	carpaGuiness.servirJarra(aleman1,1) // test para corroborar error . Si se comenta esta línea se puede probar el otro error
 	carpaCorona.entre(aleman1)
-	carpaCorona.servirJarra(aleman1,1)
-	carpaGuiness.entre(aleman1)
-	carpaGuiness.servirJarra(aleman1,1)
-	carpaGuiness.servirJarra(aleman1,1)
-	assert.that(carpaGuiness.ebriosEmpedernidos())
-	
-	assert.that(carpaCorona.quiereEntrar(checo1))
-	assert.that(carpaCorona.puedeEntrar(checo1))
-	carpaCorona.entre(checo1)
-	assert.equals(2, carpaCorona.personasIngresadas().size())
-	carpaCorona.servirJarra(checo1,1.2)
-
-	assert.notThat(carpaCorona.puedeEntrar(belga1))
-	assert.that(carpaCorona.puedeEntrar(belga2))
-	carpaCorona.entre(belga2)
-	assert.that(carpaGuiness.ebriosEmpedernidos())
-	
-	
-	
-	carpaHofbrau.entre(checo2)
-	carpaHofbrau.servirJarra(checo2,0.5)
-	assert.notThat(carpaHofbrau.ebriosEmpedernidos())
-	assert.that(carpaHofbrau.puedeEntrar(aleman2))
-	
-	carpaGuinessBelga.entre(aleman2)
-	carpaGuinessBelga.servirJarra(aleman2,0.75)
-	carpaGuinessBelga.entre(belga1)
-	carpaGuinessBelga.servirJarra(belga1,1.75)
-	assert.notThat(carpaGuinessBelga.ebriosEmpedernidos())
+	carpaCorona.servirJarra(aleman1, 1.5)
+	carpaCorona.servirJarra(aleman1, 1.5)
+	carpaGuiness.entre(aleman1)         // test para corroborar error
 	
 	assert.throwsExceptionWithMessage( "NO_CUMPLE_CONDICIONES_DE_INGRESO" , {
 		=> throw new UserExeption(message = "NO_CUMPLE_CONDICIONES_DE_INGRESO")

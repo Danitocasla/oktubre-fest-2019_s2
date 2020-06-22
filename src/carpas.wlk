@@ -34,7 +34,6 @@ class CarpaCervecera {
 		{
 			throw new UserExeption(message = "NO_CUMPLE_CONDICIONES_DE_INGRESO")
 		}
-		else {throw new UserExeption(message = "NO_QUIERE_Y_NO_CUMPLE_CONDICIONES_DE_INGRESO")}
 	}
 	method validar(persona){
 		return personasIngresadas.any({per=>per == persona})
