@@ -52,4 +52,9 @@ class CarpaCervecera {
 	method ebriosEmpedernidos(){
 		return personasIngresadas.all({pers=>pers.ebrioEmpedernido()})
 	}
+	// REQUERIMIENTOS AVANZADOS
+	method personasCompatibles(persona1,persona2){
+		return persona1.soyCompatibleCon(persona2)
+	}
+	
 }

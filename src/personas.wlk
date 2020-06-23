@@ -18,6 +18,23 @@ class Persona {
 	method ebrioEmpedernido() {	return jarrasCompradas.all({jarr=>jarr.capacidad()>=1}) }
 	method esPatriota()    // para heredar y modificar
 	method leGusta(marca)  // para heredar y modificar
+	
+	// REQUERIMIENTOS AVANZADOS
+	method jarraDe(marca){
+		return marcasQueGustan.contains(marca)
+	}
+	method marcasCoincidentes(persona){
+		return marcasQueGustan.filter({marca=>persona.jarraDe(marca)}).size()
+		//return jarrasCompradas.filter({jarra=>persona.jarraDe(jarra.marca())}).size()
+	}
+	method marcasDiferentes(persona){
+		return (self.marcasCoincidentes(persona)-marcasQueGustan.size()).abs()
+	}
+	
+	method soyCompatibleCon(persona){
+		return self.marcasCoincidentes(persona)> self.marcasDiferentes(persona)
+	}
+	
 }
 
 class Aleman inherits Persona{
