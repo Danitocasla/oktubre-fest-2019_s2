@@ -3,6 +3,7 @@ import nacionalidades.*
 class Cerveza{
 	var property lupulo   // gramos por litro
 	var property pais     // de origen
+	method graduacion()   // clase abstracta que convierte a Cerveza en Clase abstracta
 }
 
 class Rubia inherits Cerveza{
@@ -14,7 +15,7 @@ object graduacion{
 }
 
 class Negra inherits Cerveza{
-	method graduacion(){ return (graduacion.reglamentaria().min(self.lupulo()*2)) }
+	override method graduacion(){ return (graduacion.reglamentaria().min(self.lupulo()*2)) }
 }
 
 class Roja inherits Negra{
